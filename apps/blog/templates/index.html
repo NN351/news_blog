@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Все посты
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+      <div class="mb-4">
+        <h4>Filters</h4>
+        <hr>
+        <form method="get">
+          {{ filter.form.as_p }}
+          <input type="submit" />
+      </form>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+      {% for p in page_obj %}
+        <div class="row">
+            <div class="col mb-4">
+                <h6>{{p.author.username}}</h6>
+                <p>{{p.created_at|date:"d-F Y"}}</p>
+                
+                <a href="{% url 'post_detail' p.pk %}" style="text-decoration:none;">
+                    <h4>{{p.title}}</h4>
+                </a>
+                
+                <div>
+                    <a href="">
+                        <img src="{{ p.image.url }}" alt="" style="width:800px; height: 600px;  object-fit: contain;">
+                    </a>
+                </div>
+
+                <div>
+                    <p>{{ p.description|truncatewords:50|safe }}    
+                    <a href="{% url 'post_detail' p.pk %}" style="text-decoration: none;">Читать дальше</a>
+                    </p>
+                <hr>
+                </div>
+            
+                
+            </div>
+        </div>
+      {% endfor %}
+        
+      <!-- продолжаем добавлять посты по мере необходимости -->
+    </div>
+
+      <div class="posts_pagination">      
+          <nav aria-label="...">
+            <ul class="pagination">
+              
+              <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="?page={% if page_obj.has_previous%}{{page_obj.previous_page_number }}{% endif %}">
+                  Назад</a>
+              </li>
+              
+              {% for page_number in page_obj.paginator.page_range %}
+              
+                <li class="page-item {% if page_number == page_obj.number %} active  {% endif %}">
+                  <a class="page-link" href="?page={{page_number}}">
+                    {{page_number}}
+                  </a>
+                </li>
+
+              {% endfor %}
+
+              <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link" href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}">Вперед</a>
+              </li>
+              
+            </ul>
+          </nav>
+      </div>
+
+</div>
+{% endblock %}

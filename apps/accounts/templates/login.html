@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+    <!-- Section: Design Block -->
+<div class="sigin-container">
+
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+          height: 300px;
+          "></div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+          margin-top: -100px;
+          background: hsla(0, 0%, 100%, 0.8);
+          backdrop-filter: blur(30px);
+          ">
+      <div class="card-body py-5 px-md-5">
+  
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5">Авторизация в системе</h2>
+            <form method="post">
+              
+              {% csrf_token %}
+              
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                {{form.email}}
+                <label class="form-label" for="form3Example3">Электронная почта</label>
+              </div>
+  
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                {{form.password}}
+                <label class="form-label" for="form3Example4">Пароль</label>
+              </div>
+  
+              <!-- Checkbox -->
+             
+  
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Войти
+              </button>
+  
+              <!-- Register buttons -->
+              <div class="text-center">
+                <p>or sign up with:</p>
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+  
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-google"></i>
+                </button>
+  
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-twitter"></i>
+                </button>
+  
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-github"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  <!-- Section: Design Block -->
+</div>
+{% endblock %}
